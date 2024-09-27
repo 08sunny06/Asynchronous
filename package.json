@@ -1,0 +1,19 @@
+{
+  "name": "asynchronous",
+  "version": "1.0.0",
+  "description": "\"To do asynchronous problem\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/08sunny06/Asynchronous.git"
+  },
+  "author": "SHOUNAK MANDAL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/08sunny06/Asynchronous/issues"
+  },
+  "homepage": "https://github.com/08sunny06/Asynchronous#readme"
+}
