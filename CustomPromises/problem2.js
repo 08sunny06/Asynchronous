@@ -83,5 +83,5 @@ function changeLipsum(){
     .catch(err => console.log(err))
 }
 
-changeLipsum()
+module.exports = {changeLipsum}
 
