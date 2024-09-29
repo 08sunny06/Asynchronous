@@ -1,46 +1,50 @@
 const fs = require("fs")
 
-function creatingFile(path) {
-    fs.writeFile(path, "", (err) => {
-        if (err)
-            console.log(err)
-    })
-}
-
-function deletingFile(path) {
-    fs.unlink(path, (err) => {
-        if (err)
-            console.log(err)
-    })
-}
-
-
-function createDeleteFile(cond) {
-    return new Promise((resolve, reject)=>{
-        fs.mkdir("CustomPromises/jsonFiles",{recursive:true},(err)=>{
+function mkdir(path){
+    return new Promise((resolve,reject)=>{
+        fs.mkdir(path,{recursive:true},(err)=>{
             if(err)
-                console.log(err)
-            else{
-                if(cond){
-                    for(let i=0; i<5; i++)
-                        resolve(creatingFile(`/home/shounak/Asynchronous/CustomPromises/jsonFiles/randomFile${i+1}.json`))
-                }
-                else{
-                    for(let i=0; i<5; i++)
-                        reject(deletingFile(`/home/shounak/Asynchronous/CustomPromises/jsonFiles/randomFile${i+1}.json`))
-                }
-            }
+                reject(err)
+            else
+                resolve("successfully created a directory")
         })
     })
-    return ""
 }
 
-function successfulExecution(getResolve){
-    console.log(getResolve)
+function createRandomFiles(path,data){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{fs.writeFile(path,data,(err)=>{
+            if(err)
+                reject(err)
+            else
+                resolve("Successfully created all the files")
+        })},2000)
+    })
 }
 
-function failedExecution(getRejected){
-    console.log(getRejected)
+function deleteRandomFiles(path){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{fs.unlink(path,err=>{
+            if(err)
+                reject(err)
+            else
+                resolve("Successfully deleted all the files")
+        })},5000)
+    })
 }
 
-module.exports = {createDeleteFile, successfulExecution, failedExecution};
+function createDeleteRandomFiles(){
+    let path = "CustomPromises/jsonfiles"
+    mkdir(path)
+    .then(()=>{
+        for(let i=0; i<5; i++)
+            createRandomFiles(`${path}/randomFile${i+1}.json`,"")
+    })
+    .then(()=>{
+        for(let i=0; i<5; i++)
+            deleteRandomFiles(`${path}/randomFile${i+1}.json`)
+    })
+    .catch(err=>console.log(err))
+}
+
+module.exports = {createDeleteRandomFiles}
