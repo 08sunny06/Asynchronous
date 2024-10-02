@@ -75,13 +75,18 @@ function changeLipsum(){
     .then((data)=>writePromise("CustomPromises/changedfiles/text3.txt", sentenceSpliter(data).join("\n")))
     .then(()=>appendPromise("CustomPromises/filename.txt", "\ntext3.txt"))
     .then(()=>readPromise("CustomPromises/filename.txt"))
-    .then((data)=>{
-        data = data.split("\n")
-        setTimeout(()=>{for(let i=0; i<data.length; i++)
-            deletePromise(`CustomPromises/changedfiles/text${i+1}.txt`)},5000)
-    })
     .catch(err => console.log(err))
 }
 
-module.exports = {changeLipsum}
+function deleteFiles(){
+    readPromise("CustomPromises/filename.txt")
+    .then((data)=>{
+        data = data.split("\n")
+        for(let i=0; i<data.length; i++)
+            deletePromise(`CustomPromises/changedfiles//${data[i]}`)
+    })
+    .catch(err=>console.log(err))
+}
+
+module.exports = {changeLipsum, deleteFiles}
 

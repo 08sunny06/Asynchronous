@@ -50,18 +50,15 @@ function deleteRandomFiles(path){
 
 // createDelete()
 
-async function createDeleRandom(){
-    let path = "Async_Await/jsonfiles"
-    let res = await mkdir(path)
-    setTimeout(async()=>{
-        for(let i=0; i<5; i++)
-            await createRandomFiles(`${path}/randomFiles${i+1}.json`,"")
-    },3000)
-    setTimeout(async()=>{
-        for(let i=0; i<5; i++)
-            await deleteRandomFiles(`${path}/randomFiles${i+1}.json`)
-    },5000)
-    
+async function createRandom(){
+    let res = await mkdir("Async_Await/jsonfiles")
+    for(let i=0; i<5; i++)
+        await createRandomFiles(`Async_Await/jsonfiles/randomFiles${i+1}.json`,"")    
 }
 
-module.exports = {createDeleRandom}
+async function deleteRandom(){
+    for(let i=0; i<5; i++)
+        await deleteRandomFiles(`Async_Await/jsonfiles/randomFiles${i+1}.json`)
+}
+
+module.exports = {createRandom, deleteRandom}

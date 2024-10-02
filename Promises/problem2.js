@@ -20,12 +20,16 @@ function lipsumUpgrades() {
     .then((data)=>fs.writeFile("Promises/modifiedFiles/text3.txt",(data.split("\n").sort()).join("\n")))
     .then(()=>fs.appendFile("Promises/filename.txt","\ntext3.txt"))
     .then(()=>fs.readFile("Promises/filename.txt","utf-8"))
-    .then((data)=>{
-        data = data.split("\n")
-        setTimeout(()=>{for(let i=0; i<data.length; i++)
-                            fs.unlink(`Promises/modifiedFiles/text${i+1}.txt`)},5000)
-    })
     .catch((err)=>console.log(err))
 }
 
-module.exports = { lipsumUpgrades }
+function deleteFiles(){
+    fs.readFile("Promises/filename.txt","utf-8")
+    .then((data)=>{
+        data=data.split("\n")
+        for(let i=0; i<data.length; i++)
+            fs.unlink(`Promises/modifiedFiles/${data[i]}`)
+    })
+}
+
+module.exports = { lipsumUpgrades, deleteFiles }

@@ -1,5 +1,5 @@
 const func = require("/home/shounak/Asynchronous/CustomPromises/problem2.js")
 
-let chanLipsum = func.changeLipsum
+func.deleteFiles() // use this function to delete files
 
-chanLipsum()
+func.changeLipsum() // use this function to create files

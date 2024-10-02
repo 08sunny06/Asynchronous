@@ -73,12 +73,13 @@ async function lipsumTasks(){
     let contents2 =  await readingFile("Async_Await/upgradedFiles/text2.txt")
     await writingFile("Async_Await/upgradedFiles/text3.txt",(contents2.split("\n").sort()).join("\n"))
     await appendingFile("Async_Await/filename.txt","\ntext3.txt")
-    let contents3 = await readingFile("Async_Await/filename.txt")
-    contents3 = contents3.split("\n")
-    setTimeout(async()=>{
-    for(let i=0; i<contents3.length; i++)
-        await deletingFile(`Async_Await/upgradedFiles/${contents3[i]}`)
-    },2000)
 }
 
-module.exports = {lipsumTasks}
+async function deletFile(){
+    let contents = await readingFile("Async_Await/filename.txt")
+    contents = contents.split("\n")
+    for(let i=0; i<contents.length; i++)
+        await deletingFile(`Async_Await/upgradedFiles/${contents[i]}`)
+}
+
+module.exports = {lipsumTasks, deletFile}

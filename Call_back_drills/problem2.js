@@ -40,23 +40,6 @@ function lipsumModification() {
                                                     fs.writeFile("/home/shounak/Asynchronous/Call_back_drills/updatedfiles/text3.txt", (data.split("\n").sort()).join("\n"), (err) => {
                                                         if (err)
                                                             console.log(err)
-
-                                                        console.log("Wait for 5 seconds")
-
-                                                        setTimeout(() => {
-                                                            fs.readFile("/home/shounak/Asynchronous/Call_back_drills/filename.txt", "utf-8", (err, data) => {
-                                                                if (err)
-                                                                    console.log(err)
-                                                                else {
-                                                                    data = data.split("\n")
-                                                                    for (let file of data)
-                                                                        fs.unlink(`/home/shounak/Asynchronous/Call_back_drills/updatedfiles/${file}`, (err) => {
-                                                                            if (err)
-                                                                                console.log(err)
-                                                                        })
-                                                                }
-                                                            })
-                                                        }, 5000)
                                                     })
                                                 }
                                             })
@@ -72,4 +55,20 @@ function lipsumModification() {
     })
 }
 
-module.exports = {lipsumModification}
+function deleteFiles(){
+    fs.readFile(`Call_back_drills/filename.txt`,"utf-8",(err,data)=>{
+        if(err)
+            console.log(err)
+        else{
+            data = data.split("\n")
+            for(let i=0 ; i<data.length; i++){
+                fs.unlink(`Call_back_drills/updatedfiles/${data[i]}`,(err)=>{
+                    if(err)
+                        console.log(err)
+                })
+            }
+        }
+    })
+}
+
+module.exports = {lipsumModification, deleteFiles}
