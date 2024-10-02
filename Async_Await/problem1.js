@@ -33,23 +33,6 @@ function deleteRandomFiles(path){
     })
 }
 
-// function createDelete()
-// {
-//     let path = "Async_Await/jsonfiles"
-//     mkdir(path)
-//     .then(()=>{
-//         for(let i=0; i<5; i++)
-//             createRandomFiles(`${path}/randomFile${i+1}.json`,"")
-//     })
-//     .then(()=>{
-//         for(let i=0; i<5; i++)
-//             deleteRandomFiles(`${path}/randomFile${i+1}.json`)
-//     })
-//     .catch(err=>console.log(err))
-// }
-
-// createDelete()
-
 async function createRandom(){
     let res = await mkdir("Async_Await/jsonfiles")
     for(let i=0; i<5; i++)

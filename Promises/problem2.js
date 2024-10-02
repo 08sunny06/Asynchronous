@@ -30,6 +30,7 @@ function deleteFiles(){
         for(let i=0; i<data.length; i++)
             fs.unlink(`Promises/modifiedFiles/${data[i]}`)
     })
+    .catch(err=>console.log(err))
 }
 
 module.exports = { lipsumUpgrades, deleteFiles }
